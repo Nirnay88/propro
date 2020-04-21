@@ -1,0 +1,600 @@
+
+{% load static %}
+<!DOCTYPE html>
+
+<html class="gr__" lang="en"><head>
+		
+
+		<script type="text/javascript"> 
+            
+			window.onload = function(){
+			var ctx = document.getElementById("myChart")
+			var tot = {{total}}
+			myChart = new Chart(ctx, { 
+			  type: 'bar', 
+			  data: { 
+				labels: ['CN','DBMS','TOC','SEPM','ISEE','SDL'], 
+				datasets: [ 
+				  { label: '% of Attendance', 
+					data: tot, 
+					backgroundColor :["#3e95cd", 
+					"#8e5ea2", 
+					"#3cba9f", 
+					"#e8c3b9", 
+					"#c45850", 
+			'rgba(255, 159, 64, 0.2)'
+			], 
+			  
+			borderColor: [ ], 
+			borderWidth : 5 
+				  } 
+				] 
+			  }, 
+
+			  scaleLabel :{
+				  display : true,
+				  labelString : "Nirnay",
+				  fontSize : 20
+			  },
+
+
+			  options: { 
+					scales: { 
+						yAxes: [{ 
+							ticks: { 
+								beginAtZero:true 
+							},
+							scaleLabel :{
+				 				 display : true,
+				  				labelString : "Attendance(%)",
+				  				fontSize : 20
+			  				},
+ 
+						}],
+						xAxes: [{ 
+							
+							scaleLabel :{
+				 				 display : true,
+				  				labelString : "Subjects",
+				  				fontSize : 20
+			  				},
+ 
+						}]  ,
+						 
+					},
+					legend:{
+						display: false
+					} , 
+				}  
+					
+				 
+            }); 
+            var ctx1 = document.getElementById("myChart1")
+		    var sub1 = {{prac}}
+			myChart1 = new Chart(ctx1, { 
+			  type: 'bar', 
+			  data: { 
+				labels: ['SDLL','DBMSL','CNL'], 
+				 xAxisID : 'ss',
+				 yAxisID : 'stylesheet',
+				datasets: [ 
+				  { label: '% of Attendance', 
+				  
+					data: sub1, 
+					backgroundColor :["#3e95cd","#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", 'rgba(255, 159, 64, 0.2)' ], 
+			  
+			borderColor: ["#3e95cd","#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", 'rgba(255, 159, 64, 0.2)' ], 
+			borderWidth : 5
+				  } 
+				] 
+			  }, 
+			  options: { 
+					scales: { 
+						yAxes: [{ 
+							ticks: { 
+								beginAtZero:true 
+							},
+							scaleLabel :{
+				 				 display : true,
+				  				labelString : "Attendance(%)",
+				  				fontSize : 20
+			  				},
+ 
+						}],
+						xAxes: [{ 
+							
+							scaleLabel :{
+				 				 display : true,
+				  				labelString : "Subjects",
+				  				fontSize : 20
+			  				},
+ 
+						}]  
+					} ,
+					legend:{
+						display: false
+					} 
+				}  
+			}); 
+			var ctx2 = document.getElementById("chartContainer")
+			var pr_att = {{tot_attendance}}
+			var ab_att = 100 - {{tot_attendance}}
+			chart2 = new CanvasJS.Chart(ctx2, {
+				animationEnabled: true,
+				title: {
+					text: "Overall Class Attendance"
+				},
+				data: [{
+					type: "pie",
+					startAngle: 240,
+					yValueFormatString: "##0.00\"%\"",
+					indexLabel: "{label} {y}",
+					dataPoints: [
+						{y: pr_att, label: "Present"},
+						{y: ab_att, label: "Absent"},
+
+					]
+				}]
+			});
+			chart2.render();
+
+			//var n3 ={{nk}};
+			//var n1= {{x}};
+			//var n2 ={{y}};
+			//var nam = {{names}}
+			
+			 chart = new CanvasJS.Chart("chartContainer1", {
+				animationEnabled: true,
+				zoomEnabled: true,
+				title:{
+					text: "Student Groups"
+				},
+				axisX: {
+					title:"Attendance(in %)",
+					minimum: 0,
+					maximum: 100
+				},
+				axisY:{
+					title: "SGPA",
+					minimum: -1,
+					maximum: 10,
+					valueFormatString: "#"
+				},
+				data: [{
+					type: "scatter",
+					toolTipContent: "<b>Attendance: </b>{x} %<br/><b>SGPA: </b>{y}<br/> <b>Name: </b>{z}",
+					dataPoints: [
+						{% for i in new %}
+						{ x: {{i.0}}, y: {{i.1}}, z:'{{i.2 | safe}}', color:'{{i.3 | safe}}'},
+						{% endfor %}
+						
+					]
+				}]
+			});
+			chart.render();
+			
+			
+		}
+			  
+		</script> 
+			  
+
+		<!-- Required meta tags-->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="au theme template">
+		<meta name="author" content="Hau Nguyen">
+		<meta name="keywords" content="au theme template">
+
+		<!-- Title Page-->
+		<title>HOD</title>
+
+		<!-- Fontfaces CSS-->
+		<link href="{% static 'css/font-face.css' %}" rel="stylesheet" media="all">
+		<link href="{% static 'vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+		<link href="{% static 'vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+		<link href="{% static 'vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+
+		<!-- Bootstrap CSS-->
+		<link href="{% static 'vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+
+		<!-- {% static 'vendor CSS-->
+		<link href="{% static 'vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+		<link href="{% static 'vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+		<link href="{% static 'vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+		<link href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+		<link href="{% static 'vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+		<link href="{% static 'vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+		<link href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+
+		<!-- Main CSS-->
+		<link href="{% static 'css/theme.css' %}" rel="stylesheet" media="all">
+
+		<style type="{% static 'text/css' %}">/* Chart.js' %} */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+
+		<body class="animsition" data-gr-c-s-loaded="true" style="animation-duration: 900ms; opacity: 1;">
+		<img src="{% static 'images/college.jpg' %}" width="100%" height="100%" style="position: fixed">
+			<div class="page-wrapper">
+				<!-- HEADER DESKTOP-->
+				<header class="header-desktop4" style="position: fixed; width:100%">
+					<div class="container">
+						<div class="header4-wrap">
+							
+							<div class="header__tool">
+								<div class="header-button-item has-noti js-item-menu">
+									<i class="zmdi zmdi-notifications"></i>
+									<div class="notifi-dropdown js-dropdown">
+										<div class="notifi__title">
+											</div>
+										<div class="notifi__item">
+											<div class="bg-c1 img-cir img-40">
+												<i class="zmdi zmdi-email-open"></i>
+											</div>
+											<div class="content">
+												<p>You got a email notification</p>
+												<span class="date">April 12, 2018 06:50</span>
+											</div>
+										</div>
+										<div class="notifi__item">
+											<div class="bg-c2 img-cir img-40">
+												<i class="zmdi zmdi-account-box"></i>
+											</div>
+											<div class="content">
+												<p>Your account has been blocked</p>
+												<span class="date">April 12, 2018 06:50</span>
+											</div>
+										</div>
+										<div class="notifi__item">
+											<div class="bg-c3 img-cir img-40">
+												<i class="zmdi zmdi-file-text"></i>
+											</div>
+											<div class="content">
+												<p>You got a new file</p>
+												<span class="date">April 12, 2018 06:50</span>
+											</div>
+										</div>
+										<div class="notifi__footer">
+											<a href="#">All notifications</a>
+										</div>
+									</div>
+								</div>
+								<div class="header-button-item js-item-menu">
+									<i class="zmdi zmdi-settings"></i>
+									<div class="setting-dropdown js-dropdown">
+										<div class="account-dropdown__body">
+											<div class="account-dropdown__item">
+												<a href="#">
+													<i class="zmdi zmdi-account"></i>Account</a>
+											</div>
+											<div class="account-dropdown__item">
+												<a href="#">
+													<i class="zmdi zmdi-settings"></i>Setting</a>
+											</div>
+											<div class="account-dropdown__item">
+												<a href="#">
+													<i class="zmdi zmdi-money-box"></i>Billing</a>
+											</div>
+										</div>
+										<div class="account-dropdown__body">
+											<div class="account-dropdown__item">
+												<a href="#">
+													<i class="zmdi zmdi-globe"></i>Language</a>
+											</div>
+											<div class="account-dropdown__item">
+												<a href="#">
+													<i class="zmdi zmdi-pin"></i>Location</a>
+											</div>
+											<div class="account-dropdown__item">
+												<a href="#">
+													<i class="zmdi zmdi-email"></i>Email</a>
+											</div>
+											<div class="account-dropdown__item">
+												<a href="#">
+													<i class="zmdi zmdi-notifications"></i>Notifications</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="account-wrap">
+									<div class="account-item account-item--style2 clearfix js-item-menu">
+										<div class="image">
+											<img src="{% static 'images/icon/index.jpeg' %}" alt="John Doe">
+										</div>
+										<div class="content">
+											<a class="js-acc-btn" href="#">ADMIN</a>
+										</div>
+										<div class="account-dropdown js-dropdown">
+											<div class="info clearfix">
+												<div class="image">
+													<a href="#">
+														<img src="{% static 'images/icon/index.jpeg' %}" alt="John Doe">
+													</a>
+												</div>
+												<div class="content">
+													<h5 class="name">
+														<a href="#">Administrator</a>
+													</h5>
+													<span class="email">{{email}}</span>
+												</div>
+											</div>
+											<div class="account-dropdown__body">
+												<div class="account-dropdown__item">
+													<a href="#">
+														<i class="zmdi zmdi-account"></i>Account</a>
+												</div>
+												<div class="account-dropdown__item">
+													<a href="#">
+														<i class="zmdi zmdi-settings"></i>Setting</a>
+												</div>
+												<div class="account-dropdown__item">
+													<a href="#">
+														<i class="zmdi zmdi-money-box"></i>Billing</a>
+												</div>
+											</div>
+											<div class="account-dropdown__footer" onclick="location.href = '{% url 'log' %}'">
+												<a href="#">
+													<i class="zmdi zmdi-power"></i>Logout</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</header>
+				<!-- HEADER DESKTOP -->
+
+				<!-- WELCOME-->
+				<section class="welcome2 p-t-40 p-b-40">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="au-breadcrumb3">
+									<div class="au-breadcrumb-left">
+										
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="welcome2-inner m-t-1" style="margin-top: 40px">
+									<div class="welcome1-greeting">
+										<h1 class="title-6">
+											<span>SINHGAD COLLEGE OF ENGINEERING</span>,<br> Department Of Computer Engineering</h1>
+                                    </div>
+									
+																	
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- END WELCO-->
+			
+				<!-- PAGE CONTENT-->
+
+				
+				<div class="page-container3">
+						<div class="col-lg-8" style="left: 28.5%">
+					<section class="alert-wrap p-t-15 p-b-15">
+							<h2 class="title-1 m-b-25"><span style="background-color: white;"> Student Details :- </span></h2>
+						<div class="col-md">
+								<div class="au-card au-card--bg-blue au-card-top-countries m-b-40">
+										<div class="au-card-inner">
+											<div class="table-responsive">
+												<table class="table table-top-countries">
+													<tbody>
+														<tr>
+															<td> Class : </td>
+															<td class="text-right">T.E. 1</td>
+														</tr>
+														<tr>
+															<td>Total no of Students:</td>
+															<td class="text-right">97</td>
+														</tr>
+														
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>				 
+							<!-- END ALERT-->
+						</div>
+					</section>
+					</div>
+					<section>
+						<div class="container">
+							<div class="row">
+								<div class="col-xl-3" style="bottom: 265px; right: 100px;">
+									<!-- MENU SIDEBAR-->
+								<div style="background-color: white">
+									<aside class="menu-sidebar3 js-spe-sidebar">
+										<nav class="navbar-sidebar2 navbar-sidebar3" >
+
+											<ul class="list-unstyled navbar__list">
+												<li class="has-sub">
+													<a class="js-arrow" href="#">
+														<i class="fas fa-copy"></i>Classes
+														<span class="arrow">
+															<i class="fas fa-angle-down"></i>
+														</span>
+													</a>
+													<ul class="list-unstyled navbar__sub-list js-sub-list">
+												<li class="has-sub">
+													<a class="js-arrow" href="#">
+														<i class="fas fa-copy"></i>S.E.
+														<span class="arrow">
+															<i class="fas fa-angle-down"></i>
+														</span>
+													</a>
+													<ul class="list-unstyled navbar__sub-list js-sub-list">
+														<li>
+															<a onclick="location.href = '{% url 'callIndexDefault' %}' ">S.E. 1</a>
+														</li>
+														<li>
+															<a onclick="location.href = '{% url 'callIndexDefault' %}' ">S.E. 2</a>
+														</li>
+														<li>
+															<a onclick="location.href = '{% url 'callIndexDefault' %}' ">S.E. 3</a>
+														</li>
+														<li>
+															<a onclick="location.href = '{% url 'callIndexDefault' %}' ">S.E. D.S.E.</a>
+														</li>
+													</ul>
+												</li>
+												
+												<li class=" active has-sub">
+													<a class="js-arrow" href="#">
+														<i class="fas fa-copy"></i>T.E.
+														<span class="arrow">
+															<i class="fas fa-angle-down"></i>
+														</span>
+													</a>
+													<ul class="list-unstyled navbar__sub-list js-sub-list">
+														<li  class=" active has-sub">
+															<a onclick="location.href = '{% url 'callIndex' %}' ">T.E. 1</a>
+														</li>
+														
+														<li>
+															<a onclick="location.href = '{% url 'callIndexDefault' %}' ">T.E. 2</a>
+														</li>
+														<li>
+															<a onclick="location.href = '{% url 'callIndexDefault' %}' ">T.E. 3</a>
+						 								</li>
+													</ul>
+												</li>
+												<li class="has-sub">
+													<a class="js-arrow" href="#">
+														<i class="fas fa-copy"></i>B.E.
+														<span class="arrow">
+															<i class="fas fa-angle-down"></i>
+														</span>
+													</a>
+													<ul class="list-unstyled navbar__sub-list js-sub-list">
+														<li>
+															<a onclick="location.href = '{% url 'callIndexDefault' %}' ">B.E. 1</a>
+														</li>
+														<li>
+															<a onclick="location.href = '{% url 'callIndexDefault' %}' ">B.E. 2</a>
+														</li>
+														<li>
+															<a onclick="location.href = '{% url 'callIndexDefault' %}' ">B.E. 3</a>
+														</li>
+														
+													</ul>
+												</li>
+											</ul>
+												
+												<li class="has-sub">
+													<a>
+															<button type = "button" onclick ="location.href = '{% url 'defaulter' %}' ">Defaulters List</button>
+													</a>
+												</li>
+												<li class="has-sub">
+													<a>
+															<button type = "button" onclick ="location.href = '{% url 'ranged' %}' ">Ranged Attendance</button>
+													</a>	
+												</li>
+												<li class="has-sub">
+														<a>
+															<button type = "button" onclick="location.href = '{% url 'callIndexDefault' %}' ">Notice Board</button> 
+														</a>
+													</li>
+												<li class="has-sub">
+														<a>													
+														<button type = "button" onclick ="location.href = '{% url 'aboutus' %}' ">About Us </button>
+														</a>
+														
+												</li>
+												
+											</li>
+											</ul>
+										</nav>
+									</aside>
+								</div>	
+									<!-- END MENU SIDEBAR-->
+								</div>
+								<div class="col-xl-9">
+									<!-- PAGE CONTENT-->
+									<div class="page-content">
+										<div class="row">
+											<div class="col-lg-7">
+												<!-- RECENT REPORT-->
+												<div class="recent-report3 m-b-40">
+													<div class="title-wrap">
+														<h3 class="title-3">Theory Attendance</h3>
+														<div class="chart-info-wrap">
+															
+														</div>
+													</div>
+													<div class="filters m-b-55">
+														
+														
+													</div>
+													<div class="chart-wrap"><div style="position: absolute; inset: 1000px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+														<canvas id="myChart" style="display: block; width: 538px;" class="chartjs-render-monitor"></canvas>
+													</div>
+												</div>
+												<!-- END RECENT REPORT-->
+                                            </div>
+                                           <div class = "col-lg-5"> 
+                                            <div class="chart-percent-3 m-b-40"  style="height:410px">
+                                                <h3 class="title-3 m-b-25">Practical Attendance</h3>
+                                                
+                                                <div class="chart-wrap m-t-60"><div style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:auto;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;left:0; top:0"></div></div></div>
+                                                    <canvas id="myChart1" height="270px" class="chartjs-render-monitor"></canvas>
+                                                </div>
+                                            </div>
+                                            </div>
+
+											<div class="col-lg-7">
+												<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+											</div>
+											<div class="col-lg-5">
+												<div id="chartContainer1" style="height: 370px; width: 100%;"></div>
+											</div>
+										</div>
+
+									</div>
+									<!-- END PAGE CONTENT-->
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<!-- END PAGE CONTENT  -->
+
+			</div>
+
+			<!-- Jquery JS-->
+			<script src="{% static 'vendor/jquery-3.2.1.min.js' %}"></script>
+			<!-- Bootstrap JS-->
+			<script src="{% static 'vendor/bootstrap-4.1/popper.min.js' %}"></script>
+			<script src="{% static 'vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+			<!-- {% static 'vendor JS       -->
+			<script src="{% static 'vendor/slick/slick.min.js' %}">
+			</script>
+			<script src="{% static 'vendor/wow/wow.min.js' %}"></script>
+			<script src="{% static 'vendor/animsition/animsition.min.js' %}"></script>
+			<script src="{% static 'vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+			</script>
+			<script src="{% static 'vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+			<script src="{% static 'vendor/counter-up/jquery.counterup.min.js' %}">
+			</script>
+			<script src="{% static 'vendor/circle-progress/circle-progress.min.js' %}"></script>
+			<script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+			<script src="{% static 'vendor/chartjs/Chart.bundle.min.js' %}"></script>
+			<script src="{% static 'vendor/select2/select2.min.js' %}">
+			</script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"> 
+			</script> 
+			<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+			
+			<!-- Main JS-->
+			<script src="{% static 'js/main.js' %}"></script>
+
+			
+
+		</body></html>
