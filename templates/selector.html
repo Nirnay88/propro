@@ -57,7 +57,7 @@
 											<img src="{% static 'images/icon/index.jpeg' %}" alt="John Doe">
 										</div>
 										<div class="content">
-											<a class="js-acc-btn" href="#">ADMIN</a>
+											<a class="js-acc-btn" href="#">Nirnay Khajuria_Admin</a>
 										</div>
 										<div class="account-dropdown js-dropdown">
 											<div class="info clearfix">
@@ -103,8 +103,8 @@
 							<div class="col-md-12">
 								<div class="welcome2-inner m-t-60">
 									<div class="welcome2-greeting">
-										<h1 class="title-6">Hello
-											<span>SINHGAD COLLEGE OF ENGINEERING</span>,<br> Department Of Computer Engineering</h1>
+										<h1 class="title-6">
+											<span>Greetings to the one visting here.</span><br> A warm welcome to the my virtual home.</h1>
 									 </div>
 									
 								</div> 
@@ -116,21 +116,13 @@
 				
 				<!-- PAGE CONTENT-->
 				
-									<!-- END PAGE CONTENT-->
-								</div>
-							</div>
-						</div>
-					</section>
-				</div>
-				<!-- END      -->
 
-			</div>
-			<div class="page-container3">
+					<div class="page-container3">
 				<!-- <section class="alert-wrap p-t-70 p-b-70"> -->
 					<div class="container">
 						<!-- ALERT-->
 						<div class="card-body">
-							<p class="text-muted m-b-15">The following example adds a dropdown menu to "Menu 1":</p>
+							<p class="text-muted m-b-15">Select from the class you want to know attendance of :</p>
 
 							<ul class="nav nav-tabs">
 								<li class="nav-item">
@@ -171,6 +163,30 @@
 			</div>
 
 
+
+
+<div class="page-container3">
+				<div class="container">
+				<div class="card-body">
+							<p class="text-muted m-b-20">Let's proceed further :</p>
+
+									<li class="nav-item dropdown show">
+									<a name = "nk" class="dropdown-item" onclick="location.href = '{% url 'mycallIndex' %}' ">Click to continue.
+	
+									</a>
+								</li>
+				
+				
+				</div>
+				</div>
+				</div>
+
+
+
+<body background = "{% static 'p.jpg' %}">
+
+
+
 			<!-- Jquery JS-->
 			<script src="{% static 'vendor/jquery-3.2.1.min.js' %}"></script>
 			<!-- Bootstrap JS-->
@@ -193,6 +209,11 @@
 			</script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"> 
 			</script> 
+
+
+
+
+
 
 			<!-- Main JS-->
 			<script src="{% static 'js/main.js' %}"></script>

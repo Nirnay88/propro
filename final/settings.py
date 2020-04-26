@@ -25,7 +25,7 @@ SECRET_KEY = ')f0po)+h(fw-gg269)lv$vj4%)a#*yszq5-dj-_4hu=0m(og8v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','nirnay.pythonanywhere.com','192.168.43.191']
 
 
 # Application definition
@@ -54,7 +54,7 @@ ROOT_URLCONF = 'final.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['/home/nirnay/propro/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -113,6 +113,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+#/home/nirnay/propro/templates/
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
